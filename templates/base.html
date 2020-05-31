@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+{#        {% block head %}#}
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="p:domain_verify" content="74b28158c46b8035f8f4a5ba032e51b2" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="{{ SITENAME }}" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#fff" />
+        <meta name="apple-mobile-web-app-title" content="{{ SITENAME }}" />
+        <meta name="apple-mobile-web-app-title" content="Mahendrata" />
+        <meta name="application-name" content="Mahendrata" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#2c2c2c" />
+
+{#            <link rel="stylesheet" href="/assets/css/style.css" />#}
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+        {% if 'tipue_search' in PLUGINS %}
+            <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/jquery.min.js"></script>
+            <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.min.js"></script>
+            <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.min.js"></script>
+            <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch_set.min.js"></script>
+            <script src="{{ SITEURL }}/tipuesearch_content.js"></script>
+            <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/tipuesearch/tipuesearch.min.css" />
+        {% endif %}
+        {% block meta %}
+            <meta name="author" content="{{ AUTHOR }}"/>
+            <meta name="description" content="{{ SITEDESCRIPTION }}"/>
+            {% include "partial/og.html" %}
+        {% endblock %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{% else %}{{ FEED_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_RSS_URL %}{{ FEED_RSS_URL }}{% else %}{{ FEED_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_ATOM_URL %}{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_ATOM.format(slug=category.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+        <link href="{{ FEED_DOMAIN }}/{% if CATEGORY_FEED_RSS_URL %}{{ CATEGORY_FEED_RSS_URL.format(slug=category.slug) }}{% else %}{{ CATEGORY_FEED_RSS.format(slug=category.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_ATOM_URL %}{{ TAG_FEED_ATOM_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_ATOM.format(slug=tag.slug) }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+        <link href="{{ FEED_DOMAIN }}/{% if TAG_FEED_RSS_URL %}{{ TAG_FEED_RSS_URL.format(slug=tag.slug) }}{% else %}{{ TAG_FEED_RSS.format(slug=tag.slug) }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+        {% endif %}
+{#        {% endblock head %}#}
+</head>
+
+<body>
+    <div class="navbar" role="navigation">
+        <nav class="menu">
+            <input type="checkbox" id="menu-trigger" class="menu-trigger"/>
+            <label for="menu-trigger">
+          <span class="menu-icon">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 512 512"
+            >
+              <path
+                      d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
+              />
+            </svg>
+          </span>
+            </label>
+            <a id="mood">
+                <svg
+                        class="mood-sunny"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 512 512"
+                >
+                    <title>LIGHT</title>
+                    <line
+                            x1="256"
+                            y1="48"
+                            x2="256"
+                            y2="96"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="256"
+                            y1="416"
+                            x2="256"
+                            y2="464"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="403.08"
+                            y1="108.92"
+                            x2="369.14"
+                            y2="142.86"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="142.86"
+                            y1="369.14"
+                            x2="108.92"
+                            y2="403.08"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="464"
+                            y1="256"
+                            x2="416"
+                            y2="256"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="96"
+                            y1="256"
+                            x2="48"
+                            y2="256"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="403.08"
+                            y1="403.08"
+                            x2="369.14"
+                            y2="369.14"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="142.86"
+                            y1="142.86"
+                            x2="108.92"
+                            y2="108.92"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <circle
+                            cx="256"
+                            cy="256"
+                            r="80"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                </svg>
+                <svg
+                        class="mood-moon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 512 512"
+                >
+                    <title>DARK</title>
+                    <line
+                            x1="256"
+                            y1="48"
+                            x2="256"
+                            y2="96"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="256"
+                            y1="416"
+                            x2="256"
+                            y2="464"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="403.08"
+                            y1="108.92"
+                            x2="369.14"
+                            y2="142.86"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="142.86"
+                            y1="369.14"
+                            x2="108.92"
+                            y2="403.08"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="464"
+                            y1="256"
+                            x2="416"
+                            y2="256"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="96"
+                            y1="256"
+                            x2="48"
+                            y2="256"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="403.08"
+                            y1="403.08"
+                            x2="369.14"
+                            y2="369.14"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <line
+                            x1="142.86"
+                            y1="142.86"
+                            x2="108.92"
+                            y2="108.92"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                    <circle
+                            cx="256"
+                            cy="256"
+                            r="80"
+                            style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"
+                    />
+                </svg>
+            </a>
+            <div class="trigger">
+                <div class="trigger-container">
+                    <a class="menu-link {% if page_name == "index" %}active{% endif %}" href="{{ SITEURL }}">home</a>
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                        {% for p in pages %}
+                            {% if p.title != "resume" %}
+                            <a {% if p == page %}
+                                class="menu-link active" {% else %}
+                                class="menu-link" {% endif %}
+                                href="{{ SITEURL }}/{{ p.url }}">{{ p.title|lower }}</a>
+                        {% endif %}
+                            {% endfor %}
+                    {% endif %}
+                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                        {% for cat, null in categories %}
+                            <a {% if cat == category %}
+                                class="menu-link active" {% else %}
+                                class="menu-link" {% endif %}
+                                href="{{ SITEURL }}/{{ cat.url }}">{{ cat|lower }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- /#menu -->
+    <div class="wrapper">
+        {% block author %}
+        {% endblock %}
+        <main aria-label="Content">
+        {% block content %}
+        {% endblock %}
+        </main>
+    </div>
+    <footer class="footer">
+        {% for title, link in MENUITEMS %}
+            <a class="footer_item" href="{{ link }}">{{ title|lower }}</a>
+        {% endfor %}
+        <span class="footer_item">&copy; {{ CURRENTYEAR }}</span>
+        <small class="footer_theme-copyright">
+            Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="https://www.python.org/">Python</a>.
+        </small>
+    </footer>
+    <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/main.js" defer="defer"></script>
+{#    <script src="/assets/js/galite.js"></script>#}
+{#    <script>#}
+{#        var galite = galite || {};#}
+{#        galite.UA = "{{ site.google_analytics }}";#}
+{#    </script>#}
+</body>
+</html>
